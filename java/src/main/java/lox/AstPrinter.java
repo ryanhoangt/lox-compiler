@@ -1,6 +1,6 @@
 package lox;
 
-class AstPrinter implements Expr.Visitor<String> {
+abstract class AstPrinter implements Expr.Visitor<String> {
 
     public static void main(String[] args) {
         Expr expression = new Expr.Binary(
@@ -12,7 +12,7 @@ class AstPrinter implements Expr.Visitor<String> {
                 new Expr.Grouping(new Expr.Literal(45.67))
         );
 
-        System.out.println(new AstPrinter().print(expression));
+//        System.out.println(new AstPrinter().print(expression));
     }
 
     String print(Expr expr) {
