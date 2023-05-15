@@ -7,11 +7,13 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class LoxTest {
-
+    private final String testDirPath = Paths.get("..\\test")
+            .normalize().toAbsolutePath().toString();
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
@@ -27,7 +29,7 @@ class LoxTest {
 
     @Test
     void test_Assignment_global() throws IOException {
-        String testFilepath = "F:\\MY-WORKING-SPACE\\2023\\05-MAY\\lox-interpreter\\test\\assignment\\global.lox";
+        String testFilepath = testDirPath + "\\assignment\\global.lox";
         Lox.main(new String[]{testFilepath});
         assertEquals(
                 "before\r\n" +
@@ -39,7 +41,7 @@ class LoxTest {
 
     @Test
     void test_Assignment_local() throws IOException {
-        String testFilepath = "F:\\MY-WORKING-SPACE\\2023\\05-MAY\\lox-interpreter\\test\\assignment\\local.lox";
+        String testFilepath = testDirPath + "\\assignment\\local.lox";
         Lox.main(new String[]{testFilepath});
         assertEquals(
                 "before\r\n" +
@@ -51,7 +53,7 @@ class LoxTest {
 
     @Test
     void test_Block_scope() throws IOException {
-        String testFilepath = "F:\\MY-WORKING-SPACE\\2023\\05-MAY\\lox-interpreter\\test\\block\\scope.lox";
+        String testFilepath = testDirPath + "\\block\\scope.lox";
         Lox.main(new String[]{testFilepath});
         assertEquals(
                 "inner a\r\n" +
@@ -63,6 +65,35 @@ class LoxTest {
                         "global a\r\n" +
                         "global b\r\n" +
                         "global c",
+                outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    void test_Loop_fibonacci() throws IOException {
+        String testFilepath = testDirPath + "\\loop\\fibonacci.lox";
+        Lox.main(new String[]{testFilepath});
+        assertEquals(
+                "0\r\n" +
+                        "1\r\n" +
+                        "1\r\n" +
+                        "2\r\n" +
+                        "3\r\n" +
+                        "5\r\n" +
+                        "8\r\n" +
+                        "13\r\n" +
+                        "21\r\n" +
+                        "34\r\n" +
+                        "55\r\n" +
+                        "89\r\n" +
+                        "144\r\n" +
+                        "233\r\n" +
+                        "377\r\n" +
+                        "610\r\n" +
+                        "987\r\n" +
+                        "1597\r\n" +
+                        "2584\r\n" +
+                        "4181\r\n" +
+                        "6765",
                 outputStreamCaptor.toString().trim());
     }
 }
