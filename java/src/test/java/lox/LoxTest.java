@@ -96,4 +96,33 @@ class LoxTest {
                         "6765",
                 outputStreamCaptor.toString().trim());
     }
+
+    @Test
+    void test_function_no_return_stmt() throws IOException {
+        String testFilepath = testDirPath + "\\function\\no_return.lox";
+        Lox.main(new String[]{testFilepath});
+        assertEquals(outputStreamCaptor.toString().trim(), "6");
+    }
+
+    @Test
+    void test_function_parameters() throws IOException {
+        String testFilepath = testDirPath + "\\function\\parameters.lox";
+        Lox.main(new String[]{testFilepath});
+        assertEquals(outputStreamCaptor.toString().trim(), "0\r\n" +
+                "1\r\n" +
+                "3\r\n" +
+                "6\r\n" +
+                "10\r\n" +
+                "15\r\n" +
+                "21\r\n" +
+                "28\r\n" +
+                "36");
+    }
+    
+    @Test
+    void test_function_recursion() throws IOException {
+        String testFilepath = testDirPath + "\\function\\recursion.lox";
+        Lox.main(new String[]{testFilepath});
+        assertEquals(outputStreamCaptor.toString().trim(), "21");
+    }
 }
