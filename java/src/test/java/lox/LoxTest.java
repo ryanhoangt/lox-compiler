@@ -125,4 +125,11 @@ class LoxTest {
         Lox.main(new String[]{testFilepath});
         assertEquals(outputStreamCaptor.toString().trim(), "21");
     }
+
+    @Test
+    void test_function_simple_closure() throws IOException {
+        String testFilepath = testDirPath + "\\function\\simple_closure.lox";
+        Lox.main(new String[]{testFilepath});
+        assertEquals(outputStreamCaptor.toString().trim(), "1\r\n2");
+    }
 }
